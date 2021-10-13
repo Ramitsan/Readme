@@ -142,7 +142,8 @@
                   </div>
                   <div class="post__info">
                     <b class="post__author-name"><?= htmlspecialchars($post['username']); ?></b>
-                    <time class="post__time" datetime=""><?= $post['date'] ?></time>
+                    <?php $generate_rand_date = generate_random_date($post); ?>
+                    <time class="post__time" datetime="<?= $generate_rand_date ?>"><?= $generate_rand_date ?></time>
                   </div>
                 </a>
               </div>
