@@ -1,6 +1,8 @@
 <?php
 require_once('settings.php');
+
 $title = 'Readme: Популярное';
+date_default_timezone_set("Europe/Moscow");
 $is_auth = rand(0, 1);
 
 $user_name = 'Алиса';
@@ -12,7 +14,6 @@ $posts = [
     'content' => 'Мы в жизни любим только раз, а после ищем лишь похожих',
     'username' => 'Лариса',
     'avatar' => 'userpic-larisa-small.jpg'
-    // 'date' => generate_random_date(0)
   ],
   [
     'title' => 'Игра престолов',

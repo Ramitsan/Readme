@@ -86,7 +86,7 @@
       <div class="popular__posts">
 
         <?php foreach ($posts as $post) : ?>
-          <article class="popular__post post">
+          <article class="popular__post post <?= $post['type']; ?>">
             <header class="post__header">
               <h2><?= htmlspecialchars($post['title']); ?></h2>
             </header>
@@ -142,8 +142,9 @@
                   </div>
                   <div class="post__info">
                     <b class="post__author-name"><?= htmlspecialchars($post['username']); ?></b>
-                    <?php $generate_rand_date = generate_random_date($post); ?>
-                    <time class="post__time" datetime="<?= $generate_rand_date ?>"><?= $generate_rand_date ?></time>
+                    <?php $random_date = generate_random_date($post); ?>
+                    <time class="post__time" datetime="<?= $random_date; ?>" title= <?= date('d.m.Y H:i', strtotime($random_date)); ?>>
+                    <?= get_relative_date($random_date); ?></time>
                   </div>
                 </a>
               </div>
