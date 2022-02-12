@@ -36,17 +36,24 @@ function crop_text(string $str, int $symbols_count_default = 300) : string
 /**
  * Функция считает разницу между текущей датой и датой публикации поста и
  * возвращает ее в относительном формате
- * @param string date дата размещения поста
+ * @param integer $posts[index] индекс элемента массива $post, для которого вычисляется дата
  * @return string относительный формат даты
  */
-function get_relative_date(string $date) : string
+function get_relative_date(integer $posts[index]) : string
 {
     $current_date = date_create("now");
-    $post_date = date_create($date);
+    $post_date = generate_random_date($posts[index]);
     $date_diff = date_diff($current_date, $post_date);
 
-    // преобразуем разницу в количество дней
-    $days_count = date_interval_format($date_diff, "%a");
+    $date_diff = strtotime($date_diff); //переведим разницу в секунды
 
-    return $days_count;
+    $date_in_minutes = floor($date_diff / 60);
+    $date_in_hours = floor($date_in_minutes / 60);
+    $date_in_days = floor($date_in_hours / 24);
+    $date_in_week = floor($date_in_days / 7);
+    $date_in_month = floor($date_in_days / 30);
+
+
+
+    return ;
 }
