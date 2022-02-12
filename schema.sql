@@ -4,7 +4,7 @@ DEFAULT COLLATE utf8_general_ci;
 
 USE readme;
 
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   user_registration_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   user_email VARCHAR(128) NOT NULL UNIQUE,
@@ -13,7 +13,7 @@ CREATE TABLE users (
   user_avatar VARCHAR(255)
 );
 
-CREATE TABLE posts (
+CREATE TABLE IF NOT EXISTS posts (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   post_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   post_title VARCHAR(128) NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE posts (
   FOREIGN KEY(post_hashtag) REFERENCES hashtags -- ???
 );
 
-CREATE TABLE comments (
+CREATE TABLE IF NOT EXISTS comments (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   comment_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   comment_text_content VARCHAR(128) NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE comments (
   FOREIGN KEY(comment_post) REFERENCES posts(id)
 );
 
-CREATE TABLE likes (
+CREATE TABLE IF NOT EXISTS likes (
   like_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   like_author INT NOT NULL,
   like_post INT NOT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE likes (
   FOREIGN KEY(like_post) REFERENCES posts(id)
 );
 
-CREATE TABLE subscriptions (
+CREATE TABLE IF NOT EXISTS subscriptions (
   subscription_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   subscription_sender INT NOT NULL,
   subscription_recipient INT NOT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE subscriptions (
   FOREIGN KEY(subscription_recipient) REFERENCES users(id)
 );
 
-CREATE TABLE messages (
+CREATE TABLE IF NOT EXISTS messages (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   message_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   message_text VARCHAR(128) NOT NULL,
@@ -68,23 +68,13 @@ CREATE TABLE messages (
   FOREIGN KEY(message_recipient) REFERENCES users(id)
 );
 
-CREATE TABLE hashtags (
+CREATE TABLE IF NOT EXISTS hashtags (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   hashtag_title VARCHAR(128) NOT NULL UNIQUE
 );
 
-CREATE TABLE content_types (
+CREATE TABLE IF NOT EXISTS content_types (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   content_type_title VARCHAR(128) NOT NULL UNIQUE,
   content_type_icon VARCHAR(128) NOT NULL UNIQUE
 );
-
-
-
-
-
-
-
-
-
-
