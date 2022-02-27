@@ -13,7 +13,8 @@ $posts = [
     'type' => 'post-quote',
     'content' => 'Мы в жизни любим только раз, а после ищем лишь похожих',
     'username' => 'Лариса',
-    'avatar' => 'userpic-larisa-small.jpg'
+    'avatar' => 'userpic-larisa-small.jpg',
+    'date' => generate_random_date(0)
   ],
   [
     'title' => 'Игра престолов',
@@ -31,28 +32,32 @@ $posts = [
         конец',
 
     'username' => 'Владик',
-    'avatar' => 'userpic.jpg'
+    'avatar' => 'userpic.jpg',
+    'date' => generate_random_date(1)
   ],
   [
     'title' => 'Наконец обработал фотки!',
     'type' => 'post-photo',
     'content' => 'rock-medium.jpg',
     'username' => 'Виктор',
-    'avatar' => 'userpic-mark.jpg'
+    'avatar' => 'userpic-mark.jpg',
+    'date' => generate_random_date(2)
   ],
   [
     'title' => 'Моя мечта',
     'type' => 'post-video',
     'content' => 'https://www.youtube.com/watch?v=9TZXsZItgdw',
     'username' => 'Лариса',
-    'avatar' => 'userpic-larisa-small.jpg'
+    'avatar' => 'userpic-larisa-small.jpg',
+    'date' => generate_random_date(3)
   ],
   [
     'title' => 'Лучшие курсы',
     'type' => 'post-link',
     'content' => 'www.htmlacademy.ru',
     'username' => 'Владик',
-    'avatar' => 'userpic.jpg'
+    'avatar' => 'userpic.jpg',
+    'date' => generate_random_date(4)
   ]
 ];
 

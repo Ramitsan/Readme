@@ -36,14 +36,13 @@ function crop_text(string $str, int $symbols_count_default = 300) : string
 /**
  * Функция считает разницу между текущей датой и датой публикации поста и
  * возвращает ее в относительном формате
- * @param integer $posts[index] индекс элемента массива $post, для которого вычисляется дата
+ * @param string $date дата публикации поста
  * @return string относительный формат даты
  */
-function get_relative_date(integer $posts[index]) : string
+function get_relative_date(string $date) : string
 {
     $current_date = date_create("now");
-    $post_date = generate_random_date($posts[index]);
-    $date_diff = date_diff($current_date, $post_date);
+    $date_diff = date_diff($current_date, $date);
 
     $date_diff = strtotime($date_diff); //переведим разницу в секунды
 
@@ -52,8 +51,19 @@ function get_relative_date(integer $posts[index]) : string
     $date_in_days = floor($date_in_hours / 24);
     $date_in_week = floor($date_in_days / 7);
     $date_in_month = floor($date_in_days / 30);
+    $date_in_years = floor($date_in_days / 365);
 
-
-
-    return ;
+    if ($date_in_minutes < 60) {
+        return get_noun_plural_form($date_in_minutes, 'минута', 'минуты', 'минут');
+    } elseif ($date_in_hours < 24) {
+        return get_noun_plural_form($date_in_hours, 'час', 'часа', 'часов');
+    } elseif ($date_in_days < 7) {
+        return get_noun_plural_form($date_in_days, 'день', 'дня', 'дней');
+    } elseif ($date_in_week < 5) {
+        return get_noun_plural_form($date_in_week, 'неделя', 'недели', 'недель');
+    } elseif ($date_in_month < 12) {
+        return get_noun_plural_form($date_in_month, 'месяц', 'месяца', 'месяцев');
+    } else {
+        return get_noun_plural_form($date_in_years, 'год', 'года', 'лет');
+    }
 }
