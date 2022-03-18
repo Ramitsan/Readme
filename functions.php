@@ -41,10 +41,9 @@ function crop_text(string $str, int $symbols_count_default = 300) : string
  */
 function get_relative_date(string $date) : string
 {
-    $current_date = date_create("now");
-    $date_diff = date_diff($current_date, $date);
-
-    $date_diff = strtotime($date_diff); //переведим разницу в секунды
+    $date = strtotime($date);
+    $current_date = time();
+    $date_diff = $current_date - $date;
 
     $date_in_minutes = floor($date_diff / 60);
     $date_in_hours = floor($date_in_minutes / 60);
@@ -54,16 +53,22 @@ function get_relative_date(string $date) : string
     $date_in_years = floor($date_in_days / 365);
 
     if ($date_in_minutes < 60) {
-        return get_noun_plural_form($date_in_minutes, 'минута', 'минуты', 'минут');
+        $noun_form = get_noun_plural_form($date_in_minutes, 'минута', 'минуты', 'минут');
+        return "{$date_in_minutes} {$noun_form} назад";
     } elseif ($date_in_hours < 24) {
-        return get_noun_plural_form($date_in_hours, 'час', 'часа', 'часов');
+        $noun_form = get_noun_plural_form($date_in_hours, 'час', 'часа', 'часов');
+        return "{$date_in_hours} {$noun_form} назад";
     } elseif ($date_in_days < 7) {
-        return get_noun_plural_form($date_in_days, 'день', 'дня', 'дней');
+        $noun_form = get_noun_plural_form($date_in_days, 'день', 'дня', 'дней');
+        return "{$date_in_days} {$noun_form} назад";
     } elseif ($date_in_week < 5) {
-        return get_noun_plural_form($date_in_week, 'неделя', 'недели', 'недель');
+        $noun_form = get_noun_plural_form($date_in_week, 'неделя', 'недели', 'недель');
+        return "{$date_in_week} {$noun_form} назад";
     } elseif ($date_in_month < 12) {
-        return get_noun_plural_form($date_in_month, 'месяц', 'месяца', 'месяцев');
+        $noun_form = get_noun_plural_form($date_in_month, 'месяц', 'месяца', 'месяцев');
+        return "{$date_in_month} {$noun_form} назад";
     } else {
-        return get_noun_plural_form($date_in_years, 'год', 'года', 'лет');
+        $noun_form = get_noun_plural_form($date_in_years, 'год', 'года', 'лет');
+        return "{$date_in_years} {$noun_form} назад";
     }
 }
