@@ -41,6 +41,22 @@ INSERT INTO comments SET text_content = 'Очень интересно', author 
 
 INSERT INTO comments SET text_content = 'Хочу стать программистом! Научите!!!', author = (SELECT u.id FROM users u WHERE u.login = "Alisa"), date = '2022-03-01', post = (SELECT p.id FROM posts p WHERE p.title = "Лучшие курсы");
 
+--  получить список постов с сортировкой по популярности и вместе с именами авторов и типом контента
+SELECT p.id, title, login, content_type FROM posts p JOIN users u ON p.user_id = u.id ORDER BY p.count_views DESC;
+
+--  получить список постов для конкретного пользователя
+SELECT * FROM posts WHERE user_id = (SELECT u.id FROM users u WHERE u.user_name = "Alisa");
+
+--  получить список комментариев для одного поста, в комментариях должен быть логин пользователя
+SELECT c.id, date, login, c.text_content FROM comments c JOIN users u ON c.author = u.id WHERE c.post = 3;
+
+--  добавить лайк к посту
+INSERT INTO likes SET user = (SELECT u.id FROM users u WHERE u.login = "Alisa"), post = (SELECT p.id FROM posts p WHERE p.id = 3);
+
+--  подписаться на пользователя
+INSERT INTO subscriptions SET sender = (SELECT u.id FROM users u WHERE u.login = "Alisa"), recipient = (SELECT u.id FROM users u WHERE u.login = "Лариса");
+
+
 
 
 
