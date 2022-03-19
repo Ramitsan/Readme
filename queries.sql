@@ -45,7 +45,7 @@ INSERT INTO comments SET text_content = 'Хочу стать программи�
 SELECT p.id, title, login, content_type FROM posts p JOIN users u ON p.user_id = u.id ORDER BY p.count_views DESC;
 
 --  получить список постов для конкретного пользователя
-SELECT * FROM posts WHERE user_id = (SELECT u.id FROM users u WHERE u.user_name = "Alisa");
+SELECT * FROM posts WHERE user_id = (SELECT u.id FROM users u WHERE u.login = "Alisa");
 
 --  получить список комментариев для одного поста, в комментариях должен быть логин пользователя
 SELECT c.id, date, login, c.text_content FROM comments c JOIN users u ON c.author = u.id WHERE c.post = 3;
