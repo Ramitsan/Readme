@@ -55,13 +55,3 @@ INSERT INTO likes SET user = (SELECT u.id FROM users u WHERE u.login = "Alisa"),
 
 --  подписаться на пользователя
 INSERT INTO subscriptions SET sender = (SELECT u.id FROM users u WHERE u.login = "Alisa"), recipient = (SELECT u.id FROM users u WHERE u.login = "Лариса");
-
-
-
-
-
-
-
-
-
-
