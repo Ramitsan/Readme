@@ -7,3 +7,13 @@ $quantity_hours_in_day = 24;
 
 // создаем переменную подключения, общую на весь проект
 $con = db_connect($db_config);
+$config_file = 'config.php';
+
+
+//подключаем $config_file и устанавливаем соединение с БД
+if (file_exists($config_file)) {
+    require_once($config_file);
+    db_connect($db_config);
+} else {
+    exit("Файл config.php не найден");
+};
