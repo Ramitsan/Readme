@@ -8,7 +8,7 @@ require_once 'settings.php';
  *
  * @return object|boolean Возвращает $con - объект, который представляет соединение с сервером MySQL, либо false, если соединение не удалось
  */
-function db_connect(array $db_config) : object|boolean
+function db_connect(array $db_config) 
 {
     $con = mysqli_connect(
         $db_config['db_host'],

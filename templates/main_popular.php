@@ -40,15 +40,16 @@
                 <span>Все</span>
               </a>
             </li>
+            <?php foreach ($content_types as $type) : ?>
             <li class="popular__filters-item filters__item">
               <a class="filters__button filters__button--photo button" href="#">
-                <span class="visually-hidden">Фото</span>
-                <svg class="filters__icon" width="22" height="18">
+                <span class="visually-hidden"><?= $type['title']; ?></span>
+                <!-- <svg class="filters__icon" width="22" height="18">
                   <use xlink:href="#icon-filter-photo"></use>
-                </svg>
+                </svg> -->
               </a>
             </li>
-            <li class="popular__filters-item filters__item">
+            <!-- <li class="popular__filters-item filters__item">
               <a class="filters__button filters__button--video button" href="#">
                 <span class="visually-hidden">Видео</span>
                 <svg class="filters__icon" width="24" height="16">
@@ -79,7 +80,8 @@
                   <use xlink:href="#icon-filter-link"></use>
                 </svg>
               </a>
-            </li>
+            </li> -->
+            <?php endforeach; ?>
           </ul>
         </div>
       </div>
@@ -92,20 +94,20 @@
             </header>
             <div class="post__main">
 
-              <?php if ($post['type'] == 'post-quote') : ?>
+              <?php if ($post['content_type'] === 'post-quote') : ?>
                 <blockquote>
                   <p>
-                    <?= htmlspecialchars($post['content']); ?>
+                    <?= htmlspecialchars($post['quote']); ?>
                   </p>
-                  <cite>Неизвестный Автор</cite>
+                  <cite><?= htmlspecialchars($post['quote_author']); ?></cite>
                 </blockquote>
-              <?php elseif ($post['type'] == 'post-text') : ?>
-                <p><?= crop_text(htmlspecialchars($post['content'])); ?></p>
-              <?php elseif ($post['type'] == 'post-photo') : ?>
+              <?php elseif ($post['content_type'] === 'post-text') : ?>
+                <p><?= crop_text(htmlspecialchars($post['text_content'])); ?></p>
+              <?php elseif ($post['type'] === 'post-photo') : ?>
                 <div class="post-photo__image-wrapper">
-                  <img src="img/<?= $post['content']; ?>" alt="Фото от пользователя" width="360" height="240">
+                  <img src="img/<?= $post['image']; ?>" alt="Фото от пользователя" width="360" height="240">
                 </div>
-              <?php elseif ($post['type'] == 'post-link') : ?>
+              <?php elseif ($post['type'] === 'post-link') : ?>
                 <div class="post-link__wrapper">
                   <a class="post-link__external" href="http://" title="Перейти по ссылке">
                     <div class="post-link__info-wrapper">
@@ -116,13 +118,13 @@
                         <h3><?= htmlspecialchars($post['title']); ?></h3>
                       </div>
                     </div>
-                    <span><?= htmlspecialchars($post['content']); ?></span>
+                    <span><?= htmlspecialchars($post['link']); ?></span>
                   </a>
                 </div>
-              <?php elseif ($post['type'] == 'post-video') : ?>
+              <?php elseif ($post['type'] === 'post-video') : ?>
                 <div class="post-video__block">
                   <div class="post-video__preview">
-                    <?= embed_youtube_cover($post['content']); ?>
+                    <?= embed_youtube_cover($post['video']); ?>
                     <!-- <img src="img/coast-medium.jpg" alt="Превью к видео" width="360" height="188"> -->
                   </div>
                   <a href="post-details.html" class="post-video__play-big button">
