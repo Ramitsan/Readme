@@ -42,46 +42,14 @@
             </li>
             <?php foreach ($content_types as $type) : ?>
             <li class="popular__filters-item filters__item">
-              <a class="filters__button filters__button--photo button" href="#">
+              <a class="filters__button filters__button--<?= $type['icon'] ?> button" href="#">
                 <span class="visually-hidden"><?= $type['title']; ?></span>
-                <!-- <svg class="filters__icon" width="22" height="18">
-                  <use xlink:href="#icon-filter-photo"></use>
-                </svg> -->
-              </a>
-            </li>
-            <!-- <li class="popular__filters-item filters__item">
-              <a class="filters__button filters__button--video button" href="#">
-                <span class="visually-hidden">Видео</span>
-                <svg class="filters__icon" width="24" height="16">
-                  <use xlink:href="#icon-filter-video"></use>
+                <svg class="filters__icon" width="22" height="18">
+                  <use xlink:href="#icon-filter-<?= $type['icon'] ?>"></use>
                 </svg>
               </a>
             </li>
-            <li class="popular__filters-item filters__item">
-              <a class="filters__button filters__button--text button" href="#">
-                <span class="visually-hidden">Текст</span>
-                <svg class="filters__icon" width="20" height="21">
-                  <use xlink:href="#icon-filter-text"></use>
-                </svg>
-              </a>
-            </li>
-            <li class="popular__filters-item filters__item">
-              <a class="filters__button filters__button--quote button" href="#">
-                <span class="visually-hidden">Цитата</span>
-                <svg class="filters__icon" width="21" height="20">
-                  <use xlink:href="#icon-filter-quote"></use>
-                </svg>
-              </a>
-            </li>
-            <li class="popular__filters-item filters__item">
-              <a class="filters__button filters__button--link button" href="#">
-                <span class="visually-hidden">Ссылка</span>
-                <svg class="filters__icon" width="21" height="18">
-                  <use xlink:href="#icon-filter-link"></use>
-                </svg>
-              </a>
-            </li> -->
-            <?php endforeach; ?>
+            <?php endforeach; ?>                   
           </ul>
         </div>
       </div>
@@ -94,20 +62,20 @@
             </header>
             <div class="post__main">
 
-              <?php if ($post['content_type'] === 'post-quote') : ?>
+              <?php if ($post['content_type_title'] === 'post-quote') : ?>
                 <blockquote>
                   <p>
                     <?= htmlspecialchars($post['quote']); ?>
                   </p>
                   <cite><?= htmlspecialchars($post['quote_author']); ?></cite>
                 </blockquote>
-              <?php elseif ($post['content_type'] === 'post-text') : ?>
+              <?php elseif ($post['content_type_title'] === 'post-text') : ?>
                 <p><?= crop_text(htmlspecialchars($post['text_content'])); ?></p>
-              <?php elseif ($post['type'] === 'post-photo') : ?>
+              <?php elseif ($post['content_type_title'] === 'post-photo') : ?>
                 <div class="post-photo__image-wrapper">
                   <img src="img/<?= $post['image']; ?>" alt="Фото от пользователя" width="360" height="240">
                 </div>
-              <?php elseif ($post['type'] === 'post-link') : ?>
+              <?php elseif ($post['content_type_title'] === 'post-link') : ?>
                 <div class="post-link__wrapper">
                   <a class="post-link__external" href="http://" title="Перейти по ссылке">
                     <div class="post-link__info-wrapper">
@@ -121,7 +89,7 @@
                     <span><?= htmlspecialchars($post['link']); ?></span>
                   </a>
                 </div>
-              <?php elseif ($post['type'] === 'post-video') : ?>
+              <?php elseif ($post['content_type_title'] === 'post-video') : ?>
                 <div class="post-video__block">
                   <div class="post-video__preview">
                     <?= embed_youtube_cover($post['video']); ?>
